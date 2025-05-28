@@ -26,6 +26,13 @@
 				<label>이름:</label>
 				<input type="text" th:field="*{name}" />
 				<div class="error" th:errors="*{name}"></div>
+				<!-- 
+				<div class="error" th:errors="*{studentNo}"></div> 
+					studentEdit 객체의 studentNo 속성 값에 대한 spring form validation 오류 메시지가  
+					<div> 태그 사이에 출력된다. 
+					이 오류 메시지는 spring form validation 자동 검사 기능에 의해서 
+					bindingResult 객체에 담겨서 뷰에 전달되었다. 	
+				 -->	
 			</div>	
 			<div class="row">
 				<label>학과:</label>
@@ -58,7 +65,15 @@
 			<button type="submit" class="btn">저장</button>
 			<a href="list" class="btn">목록으로</a>
 			<span class="error" th:errors="${studentEdit}"></span>
-			<!-- 주석추가 -->
+<!-- 
+<span class="error" th:errors="${studentEdit}"></span> 
+
+		속성 값 오류 메시지가 아니고 studentEdit 객체에 대한 오류 메시지가  
+		<span> 태그 사이에 출력된다. 
+		이 오류 메시지는 액션 메소드의 아래 코드에 의해서 bindingResult 객체에 담겨서 뷰에 전달되었다. 
+		bindingResult.reject("", null, ex.getMessage()); 
+
+ -->	
 		</form>	
 	</div>
 </body>

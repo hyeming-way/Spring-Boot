@@ -33,7 +33,11 @@ public class StudentController {
 	DepartmentMapper departmentMapper;
 
 
-	//주석추가
+	//`ModelMapper`는 이 두 객체(Student,StudentEdit) 간의
+	// **데이터를 자동으로 복사**해주는 도구입니다.
+	//예를 들어, `,StudentEdit` 객체에 있는 변수값을
+	//         `Student` 객체에 그대로 옮겨서 자동으로 저장할때,
+	//         `ModelMapper`가 이를 자동으로 해줍니다.
 	ModelMapper modelMapper = new ModelMapper();
 
 
@@ -62,7 +66,22 @@ public class StudentController {
 
 		//모델
 		StudentEdit studentEdit = modelMapper.map(student, StudentEdit.class);
-		//주석추가
+		/*
+		위 코드는 다음과 같이 실행된다.
+			StudentEdit 클래스 객체 한 개를 생성한다.
+			student 객체의 속성값을, 방금 생성된 StudentEdit 객체에 채워 넣는다.
+			서로 이름이 같은 속성값만 채워진다.
+		    따라서 위 코드는 아래 코드와 같다.
+			Student student = studentMapper.findById(id);
+
+			StudentEdit studentEdit = new StudentEdit();
+			studentEdit.setId(student.getId());
+			studentEdit.setStudentNo(student.getStudentNo());
+			studentEdit.setName(student.getName());
+			studentEdit.setPhone(student.getPhone());
+			studentEdit.setEmail(student.getEmail());
+			studentEdit.setSex(student.getSex());
+		*/
 
 		//모델 역할을 하는 StudentEdit객체 저장
 		model.addAttribute("studentEdit", studentEdit);
@@ -119,11 +138,39 @@ public class StudentController {
 	public String create(Model model, @Valid StudentEdit studentEdit,
 			             BindingResult bindingResult) {
 
+		try {
+
+			log.debug("edit.html에서 등록할 학생 정보가 저장된 StudentEdit객체의 변수 정보들");
+			log.debug(": " + studentEdit.toString());
+
+			//유효성 검사 통과하지 않으면?
+			if(bindingResult.hasErrors()) {
+				throw new Exception("학생을 등록할 수 없습니다.");
+			}
+
+			//유효성 검사 통과하면? 학생등록을 하기위해
+			//1. StudentEdit 객체의 변수정보들을 -> Student객체의 변수들에 전달해서 저장
+			//방법 : ModelMapper객체 이용
+			Student student = modelMapper.map(studentEdit, Student.class);
+
+			//2. 학생등록(INSERT)작업하기위해 StudentMapper인터페이스를 구현한 자식 익명 객체의
+			//   insert메소드를 호출할 때 매개변수로 DTO역할을 하는 바로 위 Student객체 전달하여 DB작업함
+			studentMapper.insert(student);
+
+			//학생등록에 성공하면 학생목록을 DB에서 조회해 오기 위한 요청 URL주소 리턴
+			return "redirect:list";
+
+		} catch (Exception e) {
+			//유효성 검사 통과하지않으면? StudentEdit객체를 ""를 작성하여 bindingResult객체에 저장하고
+			//e.getMessage()를 이용해 "학생을 등록할 수 없습니다." 예외 메세지를 저장한 후
+			bindingResult.reject("", null, e.getMessage());
+
+			return "student/edit"; //학생 등록 화면 뷰 경로를 리턴
+		}
 
 
 
 
-		return "";
 	}
 
 
