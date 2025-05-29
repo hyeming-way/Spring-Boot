@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="net.skhu.mapper.SugangMapper">
+<!-- 
+	버전 1
+	
+	<resultMap id="findAll" type="net.skhu.dto.Sugang">
+		
+		dto를 구분할 수 있는 유일한 기본키 
+		<id property="id" column="id"/> 
+		
+		<result property="lectureId" column="lectureId"/>
+		<result property="studentId" column="studentId"/>
+		<result property="repeated" column="repeated"/>
+		<result property="cancel" column="cancel"/>
+		<result property="grade" column="grade"/>
+		
+		<association property="lecture" javaType="net.skhu.dto.Lecture">
+			<id property="id" column="lectureId"/> 
+			<result property="title" column="title" />
+			<result property="year" column="year" />
+			<result property="semester" column="semester" />
+		</association>
+		
+		<association property="student" javaType="net.skhu.dto.Student">
+			<id property="id" column="studentId"/> 
+			<result property="studentNo" column="studentNo"/>
+			<result property="name" column="name"/>
+		</association>
+	</resultMap>
+ -->	
+ 
+<!-- 
+	버전 2
+	autoMapping="true"을 사용하면,
+	조회 결과 컬럼과 그 값을 채울 DTO 객체 속성명이 같은 <result>태그 항목들을 생략할 수 있다.
+	기본키(PK) <id>태그는 생략할 수 없다.
+-->
+ 	<resultMap id="findAll" type="net.skhu.dto.Sugang" autoMapping="true">
+ 		<id property="id" column="id"/> 
+ 		
+ 		<association property="lecture" javaType="net.skhu.dto.Lecture" autoMapping="true">
+			<id property="id" column="lectureId"/> 
+		</association>
+		
+		<association property="student" javaType="net.skhu.dto.Student" autoMapping="true">
+			<id property="id" column="studentId"/>
+ 		</association>
+ 	</resultMap>
+ 
+ 
+</mapper>    
+    
+    
