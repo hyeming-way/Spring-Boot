@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>공통 레이아웃</title>
+<link rel="stylesheet" th:href="@{/css/style.css}" />
+</head>
+<body>
+	<div class="wrapper">
+
+	  	<header th:insert="~{fragments/header :: header}"></header>
+		
+		<main>
+			<div class="container" th:replace="~{${view} :: content}"></div>
+		</main>									
+
+		<footer th:insert="~{fragments/footer :: footer}"></footer>
+	</div>
+</body>
+</html>
+
+
+
+
+
+
+

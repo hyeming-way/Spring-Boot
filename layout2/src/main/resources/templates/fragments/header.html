@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>헤더</title>
+</head>
+<body>
+    <header th:fragment="header">
+        <div class="container">
+            <h1>내 개발자 블로그</h1>
+            <nav>
+                <ul>
+                    <li><a th:href="@{/}">홈</a></li>
+                    <li><a th:href="@{/student/list}">학생 목록</a></li>
+                    <li><a href="#">소개</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+</body>
+</html>
