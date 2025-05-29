@@ -50,7 +50,9 @@ public class StudentController {
 	*/
 	@GetMapping("list")
 	public String list(Model model,  Pagination pagination) {
-									 //pg=1 ,  sz=15
+									//@Model Attribute가 생략됨
+									//pg=1 ,  sz=15
+									//pg=2 ,  sz=15
 
 		List<Student> students = studentMapper.findAll(pagination);
 
