@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<link rel="stylesheet" type="text/css" href="/css/style.css">
+</head>
+<body>
+	<header  th:fragment="header">
+        <h1>온라인 명함</h1>
+        <nav>
+            <ul>
+                <li><a th:href="@{/}">홈</a></li>
+                <li><a th:href="@{/about}">소개</a></li>
+                <li><a th:href="@{/contact}">연락처</a></li>
+            </ul>
+        </nav>
+    </header>
+</body>
+</html>

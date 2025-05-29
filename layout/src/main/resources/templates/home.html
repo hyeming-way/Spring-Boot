@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>온라인 명함</title>
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+</head>
+<body>
+<!-- 
+<div> 태그: HTML의 <div> 요소로, 웹 페이지에서 블록 컨테이너를 나타냅니다.
+
+th:insert 속성: Thymeleaf의 속성으로, 다른 템플릿 파일이나 템플릿의 일부를 현재 위치에 삽입할 때 사용됩니다.
+
+~{...}: Thymeleaf에서 URL을 해석할 때 사용하는 구문입니다. 이 구문 안에 템플릿 파일의 경로를 작성합니다.
+
+fragments/header :: header:
+
+fragments/header: fragments 디렉토리 안에 있는 header라는 템플릿 파일 header.html을 가리킵니다.
+
+:: header: header 템플릿 파일 안에 있는 header라는 이름의 부분(fragment)을 가리킵니다. 
+이는 해당 파일의 특정 부분만 삽입하고자 할 때 사용됩니다.
+ -->
+  	<div th:insert="~{fragments/header :: header}"></div>
+  
+    
+
+    <main>
+        <div class="card-container">
+            <div th:each="data : ${dataList}" class="card">
+                <img src="profile.jpg" alt="프로필 사진" class="profile-img">
+                <h2 th:text="${data.name}">이름</h2>
+                <p th:text="${data.title}">직책</p>
+                <p th:text="${data.description}">자기소개 내용</p>
+                <div class="contact-info">
+                    <p>📞 <span th:text="${data.phone}">전화번호</span></p>
+                    <p>✉️ <span th:text="${data.email}">이메일</span></p>
+                    <p>🌍 <span th:text="${data.website}">웹사이트</span></p>
+                </div>
+            </div>
+        </div>
+    </main>
+<!-- 
+각 부분 설명
+<div> 태그:   
+설명 -> HTML의 <div> 요소는 블록 컨테이너를 나타내며, 다른 HTML 요소들을 그룹화할 수 있습니다.
+
+th:insert 속성:  
+설명 -> Thymeleaf의 속성으로, 다른 템플릿 파일이나 템플릿의 일부를 현재 위치에 삽입할 때 사용됩니다. 
+       이것은 다른 템플릿 파일을 포함시키는 방법으로, 코드를 재사용할 수 있게 해줍니다.
+
+~{...} 구문: 
+설명 ->  Thymeleaf에서 URL을 해석할 때 사용하는 구문입니다. 이 안에 템플릿 파일의 경로를 작성합니다. ~는 홈 디렉토리를 나타내며, 템플릿 파일의 경로를 의미합니다.
+
+
+fragments/footer :: footer:
+
+설명1 ->  fragments/footer: fragments 디렉토리 안에 있는 footer라는 템플릿 파일을 가리킵니다.
+
+설명2 ->  :: footer: footer 템플릿 파일 안에 정의된 footer라는 이름의 부분(fragment)을 가리킵니다. 이는 파일의 특정 부분만을 삽입하는 데 사용됩니다.
+ -->
+	<div th:insert="~{fragments/footer :: footer}"></div>
+   
+</body>
+</html>
