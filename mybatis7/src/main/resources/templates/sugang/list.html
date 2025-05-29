@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" type="text/css" th:href="@{/common.css}" />
+<title>Insert title here</title>
+</head>
+<body>
+	<div class="container">
+		<h1>수강신청 목록</h1>
+		<table class="list">
+			<thead>
+				<tr>
+					<th>id</th>
+					<th>학번</th>
+					<th>이름</th>
+					<th>강좌명</th>
+					<th>년도</th>
+					<th>학기</th>
+					<th>학점</th>
+					<th>재수강</th>
+					<th>철회</th>
+				</tr>
+			</thead>
+			<tbody>
+			<!-- model.addAttribute("sugangs", sugangMapper.findAll());
+							  //List<Sugang>	
+			-->
+				<tr th:each=" sugang : ${sugangs} ">
+					<td th:text="${sugang.id}"></td>
+					<td th:text="${sugang.studentNo}"></td>
+					<td th:text="${sugang.name}"></td>
+					<td th:text="${sugang.title}"></td>
+					<td th:text="${sugang.year}"></td>
+					<td th:text="${sugang.semester}"></td>
+					<td th:text="${sugang.grade}"></td>
+					<td th:text="${sugang.repeated ? '재수강' : '' }"></td>
+					<td th:text="${sugang.cancel ? '철회' : '' }"></td>
+				</tr>
+			</tbody>
+		</table>
+		
+	</div>
+</body>
+</html>
